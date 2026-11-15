@@ -2,6 +2,8 @@
   'use strict';
   const $ = (s, el = document) => el.querySelector(s);
   const reduced = false; /* luôn bật hiệu ứng */
+  const LOW = innerWidth < 700 || (navigator.hardwareConcurrency || 8) <= 4;
+  const TOUCH = matchMedia('(hover: none)').matches;
   const rand = (a, b) => Math.random() * (b - a) + a;
   const pick = a => a[(Math.random() * a.length) | 0];
   const COLORS = ['#ff6b8b', '#ffb938', '#2fd1a8', '#4aa8ff', '#8b6cff', '#ff8fab', '#ffd86e'];
@@ -31,7 +33,7 @@
   /* ---------- Canvas: pháo giấy + lấp lánh ---------- */
   const cv = $('#fx'), ctx = cv.getContext('2d');
   let W = 0, H = 0, parts = [];
-  const DPR = Math.min(devicePixelRatio || 1, 2);
+  const DPR = Math.min(devicePixelRatio || 1, LOW ? 1.5 : 2);
   function resize() {
     W = innerWidth; H = innerHeight;
     cv.width = W * DPR; cv.height = H * DPR;
@@ -41,7 +43,8 @@
 
   function confetti(x, y, n = 90, power = 1) {
     if (reduced) return;
-    for (let i = 0; i < n && parts.length < 900; i++) {
+    n = Math.round(n * (LOW ? .6 : 1));
+    for (let i = 0; i < n && parts.length < (LOW ? 450 : 900); i++) {
       const a = rand(-Math.PI, 0) + rand(-.4, .4), v = rand(5, 15) * power;
       parts.push({ k: Math.random() < .25 ? 'dot' : 'rect', x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v,
         w: rand(6, 11), h: rand(4, 7), r: rand(0, 6), vr: rand(-.3, .3), life: 1, dec: rand(.004, .009), c: pick(COLORS) });
@@ -80,11 +83,12 @@
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) parts.length = 0; });
 
   /* ---------- Bóng bay (bấm để làm nổ) ---------- */
   const bal = $('#balloons');
   function balloon(fromBottom = true) {
-    if (reduced || document.hidden || bal.children.length > 22) return;
+    if (reduced || document.hidden || bal.children.length > (LOW ? 12 : 22)) return;
     const b = document.createElement('div');
     const w = rand(40, 66);
     b.className = 'balloon';
@@ -102,9 +106,28 @@
     b.addEventListener('animationend', () => b.remove());
     bal.appendChild(b);
   }
-  setInterval(balloon, 1300);
+  setInterval(balloon, LOW ? 1900 : 1300);
   for (let i = 0; i < 4; i++) setTimeout(balloon, i * 300);
   const balloonBurst = n => { for (let i = 0; i < n; i++) setTimeout(balloon, i * 90); };
+
+  /* ---------- Nghiêng điện thoại -> thẻ nghiêng 3D ---------- */
+  function enableGyro() {
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const on = () => addEventListener('deviceorientation', e => {
+      if (e.gamma == null || e.beta == null) return;
+      const gx = clamp(e.gamma / 30, -1, 1), gy = clamp((e.beta - 55) / 30, -1, 1);
+      tilt.classList.add('live');
+      tilt.style.setProperty('--ry', (gx * 16) + 'deg');
+      tilt.style.setProperty('--rx', (-gy * 12) + 'deg');
+      card.style.setProperty('--mx', (50 + gx * 50) + '%');
+      card.style.setProperty('--my', (50 + gy * 50) + '%');
+    }, true);
+    try {
+      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission().then(r => { if (r === 'granted') on(); }).catch(() => {});
+      } else on();
+    } catch (_) {}
+  }
 
   /* ---------- Mở hộp quà ---------- */
   const gift = $('#gift'), stage = $('#stage');
@@ -112,6 +135,7 @@
   gift.addEventListener('click', e => {
     if (opened) return; opened = true;
     gift.classList.add('open');
+    if (TOUCH) enableGyro();
     const r = $('.gift', gift).getBoundingClientRect();
     confetti(r.left + r.width / 2, r.top + 30, 170, 1.15);
     setTimeout(() => confetti(W * .2, H * .8, 80, 1.1), 250);
