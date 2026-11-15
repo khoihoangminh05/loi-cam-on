@@ -14,8 +14,8 @@
   const PALETTE = ['#f6e3b8', '#e9c98b', '#f2a7b8', '#ffffff', '#c9a8ff', '#ffd1a1'];
 
   if (NAME) {
-    $('#to').textContent = 'Gửi ' + NAME;
-    $('#salute').textContent = 'Chào ' + NAME + ',';
+    $('#to').textContent = 'Gửi em ' + NAME;
+    $('#salute').textContent = 'Gửi em ' + NAME + ',';
   }
 
   /* ===== Tiêu đề hero: tách từng chữ ===== */
@@ -55,6 +55,9 @@
     p.appendChild(frag);
   });
 
+  const heroEl = $('.hero');
+  $$('.fly').forEach(f => f.setAttribute('data-e', f.textContent)); $$('.fly').forEach(f => f.textContent = '');
+
   /* ===== Bầu trời sao ===== */
   const sky = $('#sky'), sctx = sky.getContext('2d');
   let W = 0, H = 0, DPR = Math.min(devicePixelRatio || 1, 2);
@@ -82,6 +85,7 @@
   function drawSky(t) {
     sctx.clearRect(0, 0, W, H);
     mx += (tx - mx) * .05; my += (ty - my) * .05;
+    heroEl.style.setProperty('--px', mx.toFixed(3)); heroEl.style.setProperty('--py', my.toFixed(3));
     for (const s of stars) {
       const a = .35 + .65 * (.5 + .5 * Math.sin(t * .001 * s.sp + s.p));
       sctx.globalAlpha = a * s.z;
@@ -298,7 +302,7 @@
   });
 
   /* ===== Lời chúc cuối ===== */
-  const MSG = 'Chúc bạn một mùa đông thật ấm, thật khỏe, và luôn có người nhớ mua đúng thứ bạn cần.';
+  const MSG = 'Đã gửi 1 lần "cần gì anh giúp". Hạn dùng vô thời hạn, không đổi trả.';
   let wishing = false;
   $('#wishBtn').addEventListener('click', () => {
     const box = $('#wishMsg');
@@ -344,5 +348,34 @@
   c.addEventListener('pointerleave', () => {
     c.classList.remove('tilting');
     c.style.setProperty('--ry', '0deg'); c.style.setProperty('--rx', '0deg');
+  });
+})();
+
+/* ===== Máy bay giấy bay theo cuộn + emoji khi chạm ===== */
+(() => {
+  const plane = document.getElementById('flyer');
+  const hero = document.querySelector('.hero');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let last = { x: 0, y: 0 };
+  function place() {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    const p = h > 0 ? scrollY / h : 0;
+    const x = innerWidth / 2 + Math.sin(p * 14) * innerWidth * .4;
+    const y = 70 + p * (innerHeight - 160);
+    const ang = Math.atan2(y - last.y, x - last.x) * 180 / Math.PI;
+    plane.style.transform = `translate(${x}px,${y}px) rotate(${(isFinite(ang) ? ang : 0) + 20}deg)`;
+    last = { x, y };
+  }
+  if (!reduced) { addEventListener('scroll', place, { passive: true }); place(); }
+  const EM = ['💊', '🎁', '✨', '🌸', '⭐', '🪄', '🧧'];
+  addEventListener('pointerdown', e => {
+    if (!document.body.classList.contains('opened') || reduced) return;
+    const s = document.createElement('span');
+    s.className = 'emo';
+    s.textContent = EM[(Math.random() * EM.length) | 0];
+    s.style.left = e.clientX + 'px'; s.style.top = e.clientY + 'px';
+    s.style.setProperty('--dx', ((Math.random() - .5) * 120) + 'px');
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 1700);
   });
 })();

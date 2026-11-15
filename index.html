@@ -23,6 +23,7 @@
   <div class="grain" aria-hidden="true"></div>
   <canvas id="fx" aria-hidden="true"></canvas>
   <div class="glow" id="glow" aria-hidden="true"></div>
+  <svg class="flyer" id="flyer" viewBox="0 0 120 120" aria-hidden="true"><path d="M8 58 L112 12 L84 108 L58 78 Z" fill="#fff3d6"/><path d="M58 78 L112 12 L50 66 Z" fill="#e9c98b" opacity=".85"/><path d="M58 78 L52 104 L72 88 Z" fill="#c9a161"/></svg>
   <div class="progress" id="progress" aria-hidden="true"></div>
 
   <!-- Cổng mở đầu -->
@@ -40,10 +41,10 @@
         <path d="M58 78 L112 12 L50 66 Z" fill="#c9a161" opacity=".75"/>
         <path d="M58 78 L52 104 L72 88 Z" fill="#b88f4f" opacity=".9"/>
       </svg>
-      <p class="gate-kicker">Có một lá thư nhỏ</p>
+      <p class="gate-kicker">Thư khẩn</p>
       <h1 class="gate-title">từ phòng trên<br><em>gửi xuống phòng dưới</em></h1>
       <button class="open-btn" id="openBtn" type="button">
-        <span>Mở ra</span>
+        <span>Mở (nhẹ tay thôi)</span>
         <i aria-hidden="true"></i>
       </button>
     </div>
@@ -53,19 +54,30 @@
 
     <!-- Hero -->
     <section class="hero" id="top">
-      <p class="eyebrow reveal" id="to">Gửi bạn</p>
-      <h2 class="hero-title" id="heroTitle" aria-label="Cảm ơn bạn">Cảm ơn bạn</h2>
-      <p class="hero-sub reveal">vì hai món quà nhỏ, và vì sự tinh ý không nhỏ chút nào.</p>
-      <a class="scroll-cue reveal" href="#gifts" aria-label="Cuộn xuống">
-        <span></span>
-      </a>
+      <span class="fly" style="--x:9%;--y:20%;--z:90;--s:3rem;--t:7s">💊</span>
+      <span class="fly" style="--x:84%;--y:16%;--z:140;--s:3.4rem;--t:8s;--r:-1">🎁</span>
+      <span class="fly" style="--x:18%;--y:70%;--z:50;--s:2.2rem;--t:6s">✨</span>
+      <span class="fly" style="--x:80%;--y:66%;--z:110;--s:3rem;--t:9s;--r:-1">🪄</span>
+      <span class="fly" style="--x:46%;--y:9%;--z:30;--s:1.8rem;--t:5.5s">⭐</span>
+      <span class="fly" style="--x:92%;--y:44%;--z:60;--s:2rem;--t:6.5s">🌸</span>
+      <span class="fly" style="--x:9%;--y:46%;--z:80;--s:2.4rem;--t:7.5s;--r:-1">🧧</span>
+      <p class="eyebrow reveal" id="to">Gửi em</p>
+      <h2 class="hero-title" id="heroTitle" aria-label="Cảm ơn em">Cảm ơn em</h2>
+      <p class="hero-sub reveal">vì cái gậy với mấy viên ngậm. Anh ghi sổ rồi nhé.</p>
+      <div class="cube-wrap reveal" aria-hidden="true">
+        <div class="tiltbox"><div class="cube">
+          <div class="f f1">CẢM</div><div class="f f2">ƠN</div><div class="f f3">EM</div>
+          <div class="f f4">HÀ</div><div class="f f5">LY</div><div class="f f6">✦</div>
+        </div></div>
+      </div>
+      <a class="scroll-cue reveal" href="#gifts" aria-label="Cuộn xuống"><span></span></a>
     </section>
 
     <!-- Quà -->
     <section class="gifts" id="gifts">
       <header class="section-head reveal">
-        <p class="eyebrow">Ngày 19/11</p>
-        <h3>Hai món quà, <em>đúng chỗ ngứa</em></h3>
+        <p class="eyebrow">Hồ sơ vụ án 19/11</p>
+        <h3>Hiện vật <em>thu giữ được</em></h3>
         <p class="hint">chạm vào thẻ để lật</p>
       </header>
 
@@ -95,10 +107,10 @@
                 </g>
               </svg>
               <h4>Viên ngậm ho</h4>
-              <p class="tag">dành cho cổ họng</p>
+              <p class="tag">vật chứng #1</p>
             </div>
             <div class="face back">
-              <p class="quote">Vị ngọt dịu, mát nhẹ.<br>Cổ họng mình đã biết ơn bạn ngay từ viên đầu tiên.</p>
+              <p class="quote">Chất lượng 10/10.<br>Người tặng 11/10.</p>
             </div>
           </div>
         </article>
@@ -132,34 +144,34 @@
                 </g>
               </svg>
               <h4>Gậy đấm lưng</h4>
-              <p class="tag">dành cho tấm lưng</p>
+              <p class="tag">vật chứng #2</p>
             </div>
             <div class="face back">
-              <p class="quote">Mỗi nhịp gõ là một lần lưng mình nhẹ đi.<br>Và mình lại nhớ ra là phải cảm ơn bạn.</p>
+              <p class="quote">Đã nhận. Đã cảm động.<br>Đã ghi sổ nợ ân tình.</p>
             </div>
           </div>
         </article>
       </div>
 
       <ul class="stats reveal">
-        <li><b data-count="2">0</b><span>món quà</span></li>
-        <li><b data-count="1">0</b><span>tấm lưng được giải cứu</span></li>
-        <li><b data-count="100" data-suffix="%">0</b><span>biết ơn</span></li>
+        <li><b data-count="2">0</b><span>vật chứng</span></li>
+        <li><b data-count="1">0</b><span>ân tình ghi sổ</span></li>
+        <li><b>∞</b><span>lần cảm ơn</span></li>
       </ul>
     </section>
 
     <!-- Thẻ nhân vật -->
     <section class="profile" id="profile">
       <header class="section-head reveal">
-        <p class="eyebrow">Hồ sơ nhân vật</p>
-        <h3>Người đứng sau <em>hai món quà</em></h3>
+        <p class="eyebrow">Hồ sơ nghi phạm</p>
+        <h3>Thủ phạm <em>vụ tặng quà</em></h3>
       </header>
 
       <div class="idwrap reveal">
         <div class="idcard" id="idcard">
           <div class="holo"></div>
           <div class="idtop">
-            <span class="chip">Thẻ nhân vật</span>
+            <span class="chip">Thẻ nghi phạm</span>
             <span class="serial">No. 19/11</span>
           </div>
           <div class="idmain">
@@ -183,20 +195,21 @@
             </div>
             <div class="idinfo">
               <h4>Hà Ly</h4>
-              <p class="role">Chuyên gia tặng quà đúng chỗ</p>
+              <p class="role">Tay chơi hệ chu đáo</p>
               <ul class="meta">
                 <li><span>Quê</span><b>Hải Dương</b></li>
                 <li><span>Cung</span><b>Ma Kết ♑</b></li>
-                <li><span>Vũ khí</span><b>Gậy đấm lưng</b></li>
+                <li><span>Sở trường</span><b>Tặng quà bất ngờ</b></li>
+                <li><span>Tình trạng</span><b>Đã bị anh ghi sổ</b></li>
               </ul>
             </div>
           </div>
           <div class="bars">
             <div class="bar" style="--v:99%"><label>Tinh ý</label><i></i><em>99</em></div>
             <div class="bar" style="--v:96%"><label>Chu đáo</label><i></i><em>96</em></div>
-            <div class="bar" style="--v:100%"><label>Gu chọn quà</label><i></i><em>MAX</em></div>
+            <div class="bar" style="--v:100%"><label>Độ ngầu</label><i></i><em>MAX</em></div>
           </div>
-          <p class="idnote">Đặc sản quê nhà: bánh đậu xanh, vải thiều, và sự chu đáo.</p>
+          <p class="idnote">Cảnh báo: chu đáo vượt mức cho phép.</p>
         </div>
       </div>
     </section>
@@ -204,21 +217,26 @@
     <!-- Thư -->
     <section class="letter-wrap" id="letter">
       <header class="section-head reveal">
-        <p class="eyebrow">Đôi dòng</p>
-        <h3>Vài lời <em>cho phải phép</em></h3>
+        <p class="eyebrow">Lời khai của anh</p>
+        <h3>Vài dòng <em>cho ngầu</em></h3>
       </header>
 
       <div class="letter reveal">
         <span class="corner tl"></span><span class="corner tr"></span>
         <span class="corner bl"></span><span class="corner br"></span>
         <div class="letter-body">
-          <p class="salute" id="salute">Chào bạn,</p>
-          <p class="words">Mình đã nghĩ khá lâu xem nên cảm ơn thế nào cho phải phép. Một tin nhắn thì nhanh quá, mà cũng mỏng quá so với món quà bạn đã gửi. Nên mình chọn cách này, hy vọng bạn không thấy mình làm hơi lố.</p>
-          <p class="words">Hôm 19/11, bạn tặng mình viên ngậm ho và một chiếc gậy đấm lưng. Một món chăm cổ họng, một món chăm tấm lưng. Nghe thì giản dị, nhưng chọn đúng thứ người ta cần mà không cần hỏi là một kiểu tinh ý không phải ai cũng có.</p>
-          <p class="words">Chúng ta mới trò chuyện với nhau vài lần, vậy mà bạn vẫn nhớ tới mình. Với mình, điều đó quý hơn giá trị của bất cứ món quà nào.</p>
-          <p class="words">Nên, cảm ơn bạn. Vì chiếc gậy đã cứu lưng mình khỏi những buổi ngồi quá lâu, vì viên ngậm đã giữ giọng mình qua những ngày se lạnh, và vì một sự quan tâm nhỏ nhưng đến đúng lúc.</p>
-          <p class="words">Chúc bạn luôn khỏe mạnh, mỗi ngày đều có điều gì đó khiến bạn mỉm cười, và mọi việc bạn đang cố gắng đều đi đúng hướng. Nếu cần gì, cứ gõ cửa, phòng trên luôn sẵn sàng.</p>
-          <p class="sign">Thân,<br><span>người ở phòng trên</span></p>
+          <p class="salute" id="salute">Gửi em,</p>
+          <p class="words">Anh nghĩ mãi không biết cảm ơn sao cho ngầu, nên làm hẳn cái web này. Hơi lố, nhưng là lố có chủ đích.</p>
+          <p class="words">Quà thì anh nhận, ơn thì anh ghi sổ. Em cứ yên tâm, anh trả nợ rất đúng hẹn (hẹn bao giờ thì chưa biết).</p>
+          <p class="words">Nên anh chúc em:</p>
+          <ul class="wishes">
+            <li class="words">Deadline sợ em, chứ em đừng sợ deadline.</li>
+            <li class="words">Điểm cao, ví dày, wifi mạnh.</li>
+            <li class="words">Ốm vặt tránh xa, mùa đông ấm áp.</li>
+            <li class="words">Gặp toàn người tử tế, kể cả người ở phòng trên.</li>
+          </ul>
+          <p class="words">Cần gì cứ gõ cửa. Anh ở phòng trên, không đi đâu xa (vì lười).</p>
+          <p class="sign">Thân ái,<br><span>anh phòng trên</span></p>
         </div>
       </div>
     </section>
@@ -226,21 +244,21 @@
     <!-- Băng chữ -->
     <div class="marquee" aria-hidden="true">
       <div class="track">
-        <span>Luôn khỏe mạnh</span><i>✦</i><span>Cổ họng êm</span><i>✦</i><span>Lưng thẳng</span><i>✦</i><span>Ngày nào cũng vui</span><i>✦</i><span>Mọi điều như ý</span><i>✦</i>
-        <span>Luôn khỏe mạnh</span><i>✦</i><span>Cổ họng êm</span><i>✦</i><span>Lưng thẳng</span><i>✦</i><span>Ngày nào cũng vui</span><i>✦</i><span>Mọi điều như ý</span><i>✦</i>
+        <span>Học giỏi</span><i>✦</i><span>Ví dày</span><i>✦</i><span>Wifi mạnh</span><i>✦</i><span>Không ốm vặt</span><i>✦</i><span>Deadline tránh xa</span><i>✦</i>
+        <span>Học giỏi</span><i>✦</i><span>Ví dày</span><i>✦</i><span>Wifi mạnh</span><i>✦</i><span>Không ốm vặt</span><i>✦</i><span>Deadline tránh xa</span><i>✦</i>
       </div>
     </div>
 
     <!-- Kết -->
     <section class="finale" id="finale">
-      <p class="eyebrow reveal">Còn một điều nữa</p>
-      <h3 class="reveal">Một mùa đông <em>thật ấm</em></h3>
+      <p class="eyebrow reveal">Phần thưởng</p>
+      <h3 class="reveal">Chúc em <em>đỉnh của chóp</em></h3>
       <button class="wish-btn reveal" id="wishBtn" type="button">
-        <span>Nhận lời chúc</span>
+        <span>Nhận quà đáp lễ</span>
       </button>
       <p class="wish-msg" id="wishMsg" aria-live="polite"></p>
       <footer class="foot reveal">
-        <span>Làm bằng một buổi tối rảnh và chút thành ý.</span>
+        <span>Làm vội một buổi tối. Lố có chủ đích.</span>
       </footer>
     </section>
 
