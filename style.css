@@ -129,6 +129,32 @@ h1 .c{
 .rtrack{display:flex;gap:26px;width:max-content;animation:marq 26s linear infinite;color:#fff;font-family:var(--display);font-weight:700;font-size:1.15rem;white-space:nowrap}
 @keyframes marq{to{transform:translateX(-50%)}}
 
-@media (max-height:640px){.gifts,.sign{display:none}}
+@media (max-height:700px){.sign{display:none}.chips{display:none}}
 @media (max-width:420px){.badge{gap:10px}.chips span{font-size:.7rem}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* ---------- Trang lật 3D trong thẻ ---------- */
+.pages{display:grid;perspective:900px;margin-top:4px}
+.page{grid-area:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .6s,transform .8s var(--pop),visibility 0s .8s;transform-style:preserve-3d}
+.page[data-s=prev]{opacity:0;visibility:hidden;transform:translateX(-50px) rotateY(-70deg) scale(.9)}
+.page[data-s=next]{opacity:0;visibility:hidden;transform:translateX(50px) rotateY(70deg) scale(.9)}
+.page[data-s=on]{opacity:1;visibility:visible;transform:none;transition:opacity .6s .15s,transform .8s var(--pop) .15s,visibility 0s}
+.page[data-s=on]>*{animation:up .7s var(--pop) both}
+.page[data-s=on]>*:nth-child(1){animation-delay:.2s}.page[data-s=on]>*:nth-child(2){animation-delay:.32s}.page[data-s=on]>*:nth-child(3){animation-delay:.44s}.page[data-s=on]>*:nth-child(4){animation-delay:.56s}
+@keyframes up{from{opacity:0;transform:translateY(24px) scale(.9)}}
+h2{font-family:var(--display);font-weight:800;line-height:1.1;font-size:clamp(1.7rem,min(8vw,6dvh),2.6rem);margin:clamp(6px,1.4dvh,14px) 0 clamp(2px,.6dvh,6px);
+  background:linear-gradient(120deg,var(--coral),var(--sun),var(--mint),var(--sky),var(--violet),var(--coral));background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:hue 5s linear infinite}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:clamp(10px,2dvh,18px)}
+.nb{min-width:44px;height:44px;padding:0 16px;border-radius:999px;font-weight:600;background:#fff;box-shadow:0 6px 16px rgba(120,50,110,.18);transition:transform .25s var(--pop),opacity .3s}
+.nb:hover{transform:scale(1.1)}.nb:active{transform:scale(.92)}
+.nb.go{color:#fff;background:linear-gradient(120deg,var(--sky),var(--violet));box-shadow:0 10px 20px -6px rgba(139,108,255,.7);animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(5px)}}
+.nb.off{opacity:.25;pointer-events:none;animation:none}
+.dots{display:flex;gap:8px}
+.dots i{width:9px;height:9px;border-radius:50%;background:rgba(59,37,71,.2);transition:all .4s var(--pop)}
+.dots i.on{width:26px;border-radius:9px;background:linear-gradient(90deg,var(--coral),var(--sun))}
+.sign{margin-top:8px}
+.card{animation:none}
+.stage.show .card{animation:cardin 1s var(--pop) forwards,bob 6s ease-in-out 1s infinite,sway 9s ease-in-out 1s infinite}
+@keyframes sway{0%,100%{rotate:0 1 0 -5deg}50%{rotate:0 1 0 5deg}}
+.floaters span{translate:var(--tx,0) var(--ty,0);transition:translate .3s linear}

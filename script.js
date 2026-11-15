@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const $ = (s, el = document) => el.querySelector(s);
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduced = false; /* luôn bật hiệu ứng */
   const rand = (a, b) => Math.random() * (b - a) + a;
   const pick = a => a[(Math.random() * a.length) | 0];
   const COLORS = ['#ff6b8b', '#ffb938', '#2fd1a8', '#4aa8ff', '#8b6cff', '#ff8fab', '#ffd86e'];
@@ -121,6 +121,30 @@
     setTimeout(() => confetti(W / 2, H * .45, 100, 1), 1100);
   });
 
+  /* ---------- Lật trang ---------- */
+  const pages = [...document.querySelectorAll('.page')], dots = [...document.querySelectorAll('#dots i')];
+  const prevB = $('#prev'), nextB = $('#next');
+  let cur = 0;
+  function go(n) {
+    if (n < 0 || n >= pages.length || n === cur) return;
+    cur = n;
+    pages.forEach((p, i) => p.dataset.s = i < cur ? 'prev' : i === cur ? 'on' : 'next');
+    dots.forEach((d, i) => d.classList.toggle('on', i === cur));
+    prevB.classList.toggle('off', cur === 0);
+    nextB.classList.toggle('off', cur === pages.length - 1);
+    const r = card.getBoundingClientRect();
+    confetti(r.left + r.width / 2, r.top + r.height * .35, 45, .8);
+    balloonBurst(2);
+  }
+  prevB.addEventListener('click', () => go(cur - 1));
+  nextB.addEventListener('click', () => go(cur + 1));
+  dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+  addEventListener('keydown', e => { if (e.key === 'ArrowRight') go(cur + 1); if (e.key === 'ArrowLeft') go(cur - 1); });
+  let sx = null;
+  addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  addEventListener('touchend', e => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; sx = null; if (Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1)); }, { passive: true });
+  prevB.classList.add('off');
+
   /* ---------- Lời chúc ---------- */
   const WISHES = [
     'Chúc em luôn khỏe mạnh! 💪',
@@ -158,6 +182,11 @@
     tilt.classList.remove('live');
     tilt.style.setProperty('--ry', '0deg'); tilt.style.setProperty('--rx', '0deg');
   });
+  const fl = [...document.querySelectorAll('.floaters span')];
+  addEventListener('pointermove', e => {
+    const nx = e.clientX / W - .5, ny = e.clientY / H - .5;
+    fl.forEach((f, i) => { const d = 30 + (i % 4) * 25; f.style.setProperty('--tx', (-nx * d) + 'px'); f.style.setProperty('--ty', (-ny * d) + 'px'); });
+  }, { passive: true });
   /* chạm đâu cũng có pháo giấy nhỏ */
   addEventListener('pointerdown', e => { if (opened) { confetti(e.clientX, e.clientY, 22, .6); } });
 })();

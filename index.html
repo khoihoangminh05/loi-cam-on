@@ -67,15 +67,32 @@
           </div>
         </header>
 
-        <h1 id="title" aria-label="Cảm ơn em!">Cảm ơn em!</h1>
+        <div class="pages">
+          <section class="page" data-s="on">
+            <h1 id="title" aria-label="Cảm ơn em!">Cảm ơn em!</h1>
+            <p class="gifts"><span>💊 Viên ngậm ho</span><span>🪄 Gậy đấm lưng</span></p>
+            <p class="msg">Hôm 19/11, em tặng anh viên ngậm ho và chiếc gậy đấm lưng. Nhận quà của em, anh vừa bất ngờ vừa thấy rất ấm lòng.</p>
+          </section>
 
-        <p class="gifts"><span>💊 Viên ngậm ho</span><span>🪄 Gậy đấm lưng</span></p>
+          <section class="page" data-s="next">
+            <h2>Từ tháng lương đầu tiên</h2>
+            <p class="msg">Anh biết đó là tháng lương đầu tiên em đi làm thêm, là số tiền em tự mình vất vả làm ra từng đồng.</p>
+            <p class="msg">Em hoàn toàn có thể dành nó cho bản thân hay cho gia đình, vậy mà em vẫn nghĩ đến anh. Anh trân trọng tấm lòng đó nhiều hơn bất cứ giá trị nào của món quà.</p>
+          </section>
 
-        <p class="msg">Cảm ơn em đã tặng anh hai món quà hôm 19/11. Quà nhỏ thôi, nhưng anh rất cảm kích vì em đã nghĩ đến anh.</p>
-        <p class="msg">Chúc em học tập thật tốt, luôn khỏe mạnh và vui vẻ nhé!</p>
+          <section class="page" data-s="next">
+            <h2>Lời chúc của anh</h2>
+            <p class="msg">Mình mới trò chuyện với nhau vài lần, nên anh càng bất ngờ và biết ơn. Chúc em công việc làm thêm thuận lợi, học tập thật tốt, và những tháng lương sau đều mang lại cho em nhiều niềm vui hơn nữa.</p>
+            <button class="boom" id="boom" type="button"><span>Nhận một lời chúc 🎉</span></button>
+            <p class="wish" id="wish" aria-live="polite">&nbsp;</p>
+          </section>
+        </div>
 
-        <button class="boom" id="boom" type="button"><span>Gửi lại một lời chúc 🎉</span></button>
-        <p class="wish" id="wish" aria-live="polite">&nbsp;</p>
+        <nav class="nav">
+          <button class="nb" id="prev" type="button" aria-label="Trang trước">←</button>
+          <div class="dots" id="dots"><i class="on"></i><i></i><i></i></div>
+          <button class="nb go" id="next" type="button" aria-label="Trang sau">Tiếp →</button>
+        </nav>
         <p class="sign">anh ở phòng trên</p>
       </main>
     </div>
