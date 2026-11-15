@@ -248,3 +248,52 @@ body.locked .hero .reveal{opacity:0}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .hero-title .ch,.reveal,.w,.sign{opacity:1!important;transform:none!important;filter:none!important}
 }
+
+/* ---------- Thẻ nhân vật ---------- */
+.profile{padding-top:clamp(40px,6vw,80px)}
+.idwrap{display:flex;justify-content:center;perspective:1200px}
+.idcard{
+  --mx:50%;--my:50%;--rx:0deg;--ry:0deg;
+  position:relative;width:min(100%,460px);padding:26px 26px 22px;border-radius:26px;overflow:hidden;
+  background:linear-gradient(150deg,#241a3f,#15102a 60%,#2a1830);
+  border:1px solid rgba(233,201,139,.45);
+  box-shadow:0 40px 90px -25px rgba(0,0,0,.8),0 0 0 4px rgba(233,201,139,.06),inset 0 1px 0 rgba(255,255,255,.2);
+  transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .5s var(--ease);
+  animation:floaty 6s ease-in-out infinite;
+}
+.idcard.tilting{transition:transform .1s linear;animation:none}
+@keyframes floaty{50%{translate:0 -8px}}
+.holo{
+  position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:.5;
+  background:
+    radial-gradient(circle at var(--mx) var(--my),rgba(255,255,255,.35),transparent 40%),
+    linear-gradient(115deg,transparent 20%,rgba(242,167,184,.25) 38%,rgba(159,227,255,.22) 50%,rgba(233,201,139,.28) 62%,transparent 80%);
+  background-size:100% 100%,250% 250%;background-position:0 0,var(--mx) var(--my);
+}
+.idtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.chip{font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:#2a1a06;background:linear-gradient(120deg,#fff3d6,var(--gold));padding:5px 12px;border-radius:999px;font-weight:500}
+.serial{font-size:.7rem;letter-spacing:.22em;color:var(--muted)}
+.idmain{display:flex;gap:20px;align-items:center}
+.avatar{
+  flex:none;width:118px;height:118px;border-radius:50%;padding:4px;
+  background:conic-gradient(from 0deg,var(--gold),var(--rose),#9fe3ff,var(--gold));animation:spin 8s linear infinite;
+}
+.avatar svg{width:100%;height:100%;border-radius:50%;background:linear-gradient(160deg,#3a2a66,#7a3f66);animation:spin 8s linear infinite reverse;display:block}
+.eyes{transform-box:fill-box;transform-origin:center;animation:blink 4.5s infinite}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+.star{transform-box:fill-box;transform-origin:center;animation:twinkle 2.2s ease-in-out infinite}
+.idinfo h4{font-family:var(--script);font-weight:700;font-size:2.4rem;line-height:1;color:var(--gold-soft)}
+.role{font-size:.78rem;color:var(--rose);margin:4px 0 12px;letter-spacing:.04em}
+.meta{list-style:none;display:grid;gap:4px}
+.meta li{display:flex;gap:10px;font-size:.84rem}
+.meta span{width:52px;color:var(--muted);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding-top:2px}
+.meta b{font-weight:400}
+.bars{margin-top:22px;display:grid;gap:10px}
+.bar{position:relative;display:grid;grid-template-columns:92px 1fr 34px;align-items:center;gap:10px;font-size:.76rem}
+.bar label{color:var(--muted)}
+.bar i{position:relative;height:7px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden}
+.bar i::after{content:"";position:absolute;inset:0;width:0;border-radius:9px;background:linear-gradient(90deg,var(--rose),var(--gold));transition:width 1.6s var(--ease) .4s}
+.idwrap.in .bar i::after{width:var(--v)}
+.bar em{font-style:normal;color:var(--gold-soft);text-align:right}
+.idnote{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line);font-size:.8rem;color:var(--muted);text-align:center;font-style:italic}
+@media (max-width:420px){.idmain{flex-direction:column;text-align:center}.meta li{justify-content:center}.bar{grid-template-columns:78px 1fr 32px}}

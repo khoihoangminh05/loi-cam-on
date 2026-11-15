@@ -4,7 +4,7 @@
   /* ===== Cấu hình nhanh =====
      Có thể gắn tên vào link: ?to=Lan  -> "Gửi Lan", "Chào Lan," */
   const params = new URLSearchParams(location.search);
-  const NAME = (params.get('to') || '').trim().slice(0, 30);
+  const NAME = (params.get('to') || 'Hà Ly').trim().slice(0, 30);
 
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -324,5 +324,25 @@
       if (wi < arr.length - 1) box.appendChild(document.createTextNode(' '));
     });
     setTimeout(() => { wishing = false; }, MSG.length * 35 + 600);
+  });
+})();
+
+/* ===== Thẻ nhân vật: nghiêng + ánh holo ===== */
+(() => {
+  const c = document.getElementById('idcard');
+  if (!c) return;
+  c.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
+    const r = c.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+    c.classList.add('tilting');
+    c.style.setProperty('--ry', ((px - .5) * 16) + 'deg');
+    c.style.setProperty('--rx', (-(py - .5) * 12) + 'deg');
+    c.style.setProperty('--mx', (px * 100) + '%');
+    c.style.setProperty('--my', (py * 100) + '%');
+  });
+  c.addEventListener('pointerleave', () => {
+    c.classList.remove('tilting');
+    c.style.setProperty('--ry', '0deg'); c.style.setProperty('--rx', '0deg');
   });
 })();
